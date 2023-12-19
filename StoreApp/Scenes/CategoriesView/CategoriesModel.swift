@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CategoriesModel: Identifiable {
+struct CategoriesModel: Identifiable, Hashable {
     var id: UUID = .init()
     var categorie: String
 }

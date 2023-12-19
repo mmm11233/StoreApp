@@ -41,6 +41,7 @@ struct MainView: View {
                 .background(Color(red: 0.9, green: 0.97, blue: 1))
         }
     }
+    
     // MARK: - Destinations Grid
     private var navigationStack: some View {
         NavigationStack(path: $path) {
@@ -53,31 +54,29 @@ struct MainView: View {
             destinationGrid
         }
     }
-    
     private var destinationGrid: some View {
         LazyVGrid(columns: gridLayout) {
             ForEach(viewModel.products) { product in
-                destinationLink(product)
+                NavigationLink(
+                    destination: CategoriesView(viewModel: CategoriesViewModel()),
+                    label: {
+                        ProductsCardComponentView(
+                            imageUrl: product.images.first ?? "",
+                            balance: product.price,
+                            itemsInBacket: product.rating
+                        )
+                    }
+                )
+                .simultaneousGesture(TapGesture().onEnded {
+                })
             }
-        }
-    }
-    
-    private func destinationLink(_ product: Product) -> some View {
-        NavigationLink(value: product, label: {
-            ProductsCardComponentView(
-                imageUrl: product.images.first ?? "",
-                balance: product.price,
-                itemsInBacket: product.rating)
-        })
-        .navigationDestination(for: Product.self) { _ in
-            CategoriesView(viewModel: CategoriesViewModel())
         }
     }
     
     private var categoryButton: some View {
         HStack {
             Spacer()
-            Button("Open Categories"){}
+            Button("check out"){}
             Spacer()
         }
     }

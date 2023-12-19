@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class CategoriesViewModel: ObservableObject {
+final class CategoriesViewModel: ObservableObject{
     var categories: [CategoriesModel] {
         var categories: [CategoriesModel] = []
         
